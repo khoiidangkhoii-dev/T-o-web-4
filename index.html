@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Khôi Chào Mừng</title>
+    <!-- FontAwesome biểu tượng Mạng xã hội & Nhạc -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 35px 25px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Viền sáng dạ quang quanh Card */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Khung chứa Logo */
+        .logo-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        /* Tiêu đề & Lời chào */
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        p.bio {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        /* Style cho các nút Mạng Xã Hội */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-facebook {
+            background-color: #1877f2;
+        }
+
+        .btn-tiktok {
+            background-color: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-zalo {
+            background-color: #0068ff;
+        }
+
+        .btn-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.15);
+        }
+
+        /* Style cho Trình phát nhạc */
+        .music-player {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .song-title {
+            font-size: 13px;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-play {
+            background: #38bdf8;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: #0f172a;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .btn-play:hover {
+            transform: scale(1.1);
+            background: #7dd3fc;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-container input[type="range"] {
+            width: 80px;
+            accent-color: #38bdf8;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Logo / Ảnh đại diện -->
+        <!-- Thay logo.png bằng file ảnh của bạn -->
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo Đăng Khôi" class="logo" onerror="this.src='https://via.placeholder.com/110?text=DK'">
+        </div>
+
+        <!-- Tên & Lời chào -->
+        <h1 class="welcome-title">Đăng Khôi Chào Mừng</h1>
+        <p class="bio">Cảm ơn bạn đã ghé thăm trang cá nhân của mình!</p>
+
+        <!-- Nút Mạng Xã Hội -->
+        <div class="social-links">
+            <!-- Thay đường link Facebook của bạn -->
+            <a href="https://facebook.com" target="_blank" class="btn-social btn-facebook">
+                <i class="fa-brands fa-facebook fa-lg"></i> Facebook
+            </a>
+
+            <!-- Thay đường link TikTok của bạn -->
+            <a href="https://tiktok.com" target="_blank" class="btn-social btn-tiktok">
+                <i class="fa-brands fa-tiktok fa-lg"></i> TikTok
+            </a>
+
+            <!-- Thay số điện thoại hoặc link Zalo của bạn -->
+            <a href="https://zalo.me/0123456789" target="_blank" class="btn-social btn-zalo">
+                <i class="fa-solid fa-comment-dots fa-lg"></i> Zalo
+            </a>
+        </div>
+
+        <!-- Trình Phát Nhạc -->
+        <div class="music-player">
+            <div class="song-title">
+                <i class="fa-solid fa-music"></i>
+                <span id="song-name">Nhạc nền trang web</span>
+            </div>
+
+            <!-- Thay nhac.mp3 bằng tên file nhạc của bạn trong máy -->
+            <audio id="myAudio" src="nhac.mp3"></audio>
+
+            <div class="controls">
+                <button class="btn-play" id="playBtn" onclick="togglePlay()">
+                    <i class="fa-solid fa-play" id="playIcon"></i>
+                </button>
+
+                <div class="volume-container">
+                    <i class="fa-solid fa-volume-high" style="font-size: 12px; color: #94a3b8;"></i>
+                    <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.7" onchange="setVolume(this.value)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playIcon = document.getElementById('playIcon');
+
+        // Thiết lập âm lượng mặc định
+        audio.volume = 0.7;
+
+        // Hàm Bật/Tạm dừng nhạc
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+            }
+        }
+
+        // Điều chỉnh âm lượng
+        function setVolume(val) {
+            audio.volume = val;
+        }
+
+        // Tự động chuyển nút về Play khi phát xong
+        audio.onended = function() {
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+        };
+    </script>
+</body>
+</html>
